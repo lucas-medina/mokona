@@ -1,8 +1,6 @@
 import { combineReducers } from 'redux';
+import { storeAppStatus } from './appStatus';
 
-const reducerDummy = (action) => {
-  return '';
-}
 export default combineReducers({
-  dummy: reducerDummy
+  appStatus: storeAppStatus
 })

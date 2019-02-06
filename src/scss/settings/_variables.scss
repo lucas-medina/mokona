@@ -21,7 +21,6 @@ $mqxlg: (min-width:1600px);
   }
 }
 
-
 // Common font sizes
 @function getRem($root, $value) {
   @return ($value / $root) * 1rem;
