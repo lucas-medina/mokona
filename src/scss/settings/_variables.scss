@@ -1,0 +1,43 @@
+// Colors
+$colorWhite:    #f4f4f4;
+$colorPrimary1: #507AA8;
+$colorPrimary2: #336296;
+$colorPrimary3: #1A4D87;
+$colorPrimary4: #0E3B6E;
+$colorPrimary5: #052A54;
+$colorGolden:   #F0DE2C;
+$colorSuccess:  #24C024;
+$colorDanger:   #F02C2C;
+
+// Common media queries
+$mqxs:  (min-width:320px);
+$mqmd:  (min-width:768px);
+$mqlg:  (min-width:1366px);
+$mqxlg: (min-width:1600px);
+
+@mixin mq($mq) {
+  @media #{$mq} {
+    @content;
+  }
+}
+
+
+// Common font sizes
+@function getRem($root, $value) {
+  @return ($value / $root) * 1rem;
+}
+$rootValue: 16;
+$fontRoot:      $rootValue * 1px;
+$fontHeadline1: getRem($rootValue, 32);
+$fontHeadline2: getRem($rootValue, 28);
+$fontHeadline3: getRem($rootValue, 24);
+$fontBigger:    getRem($rootValue, 22);
+$fontBig:       getRem($rootValue, 18);
+$fontNormal:    getRem($rootValue, 16);
+$fontSmall:     getRem($rootValue, 14);
+$fontSmaller:   getRem($rootValue, 11);
+
+$layer1: 100;
+$layer2: 200;
+$layer3: 300;
+$layer4: 400;

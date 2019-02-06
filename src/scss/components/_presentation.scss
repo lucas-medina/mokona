@@ -1,0 +1,42 @@
+@import '../settings/variables';
+@import '../settings/extends';
+
+@import '../utility/animation';
+
+.presentation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: $layer1;
+  text-align: center;
+  width: 100%;
+  &__title {
+    @extend %cursive;
+    @media #{$mqmd} {
+      font-size: 5rem;
+    }
+    @media #{$mqlg} {
+      font-size: 8rem;
+    }
+    font-size: 3rem;
+    letter-spacing: .03em;
+    line-height: .733;
+    margin-bottom: .25em;
+    span {
+      display: inline-block;
+    }
+  }
+  &__titlestring {
+    animation: surge 1s cubic-bezier(0.42, 0, 0.6, 1.64) 0s 1 backwards;
+    @for $i from 1 through 3 {
+      &:nth-child(3n+#{$i}) {
+        animation-delay: 0.1 * $i + 1s
+      }
+    }
+  }
+  &__subtitle {
+    font-size: $fontNormal;
+    animation: surge .6s ease-in-out 1.35s 1 backwards;
+  }
+}

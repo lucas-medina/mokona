@@ -1,0 +1,14 @@
+@import './variables';
+@import './extends';
+
+* {
+  box-sizing: border-box;
+}
+html {
+  font-size: $fontRoot;
+  @extend %noserif;
+  color: $colorWhite;
+}
+body {
+  background-color: $colorPrimary1;
+}
