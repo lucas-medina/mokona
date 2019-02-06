@@ -9,11 +9,14 @@ body {
   transition-timing-function: cubic-bezier(.75,-0.5,0,1.75);
   perspective: 1000px;
   perspective-origin: 50% 50%;
+  box-sizing: border-box;
 }
 body.clicked {
   transform: scale(.75);
 }
 .go {
+  width: 100%;
+  max-width: 290px;
   outline: none;
   border: none;
   background-color: #01508c;

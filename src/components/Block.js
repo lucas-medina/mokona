@@ -25,9 +25,15 @@ export default class Block extends React.Component {
   componentDidMount() {
     const [x, y] = this.props.mouse;
     this.setState({ x, y });
-    window.addEventListener('mousemove', event => {
-      this.setState({x: event.clientX, y: event.clientY})
-    });
+    window.addEventListener('mousemove', this.defineMousePosition);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('mousemove', this.defineMousePosition);
+  }
+
+  defineMousePosition = (event) => {
+    this.setState({x: event.clientX, y: event.clientY});
   }
 
   render() {
