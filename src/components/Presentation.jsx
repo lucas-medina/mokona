@@ -1,12 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loadDependencies } from '../actions/flagActions';
+import { loadDependencies, standbyApp } from '../actions/flagActions';
 import '../scss/components/_presentation.scss';
 import { getTextFragments } from '../utils/stringLib';
 import PresentationLoader from './PresentationLoader';
+import PresentationSubtitle from './PresentationSubtitle';
 
 
 class Presentation extends Component {
+
+  componentDidMount() {
+    window.addEventListener('keydown', event => (
+      event.keyCode === 13 ? this.props.standbyApp() : null
+    ));
+  }
+
+  componentDidUpdate() {
+    
+  }
 
   renderSeparateText(arr) {
     return arr.map((text, index) => (
@@ -27,6 +38,7 @@ class Presentation extends Component {
   render() {
     const { appStatus, loadDependencies } = this.props;
     const isLoadingDeps = appStatus === 'loadingDependencies';
+    const isReady = appStatus === 'standby';
 
     const title = this.renderSeparateText(getTextFragments('Mokona'));
     const blockClassName = `presentation${appStatus ? ' presentation--' + appStatus : ''}`;
@@ -34,11 +46,16 @@ class Presentation extends Component {
     return (
       <div className={blockClassName}>
         <h1 className="presentation__title">{title}</h1>
-        {isLoadingDeps && <PresentationLoader />}
-        <h2 className="presentation__subtitle" 
-          onAnimationEnd={() => this.nextStage(loadDependencies)}>
-          Personal organizer :)
-        </h2>
+        <div className="presentation__loadingwrapper">
+          {isLoadingDeps && <PresentationLoader />}
+          <h2 className="presentation__subtitle" 
+            onAnimationEnd={() => this.nextStage(loadDependencies)}>
+            {
+              isLoadingDeps ? <PresentationSubtitle /> : 
+              isReady ? 'So, what do you want to do? :)' : 'Your personal organizer :)'
+            }
+          </h2>
+        </div>
       </div>
     )
   }
@@ -46,4 +63,4 @@ class Presentation extends Component {
 
 const mapStateToProps = ({ appStatus }) => ({ appStatus });
 
-export default connect(mapStateToProps, { loadDependencies })(Presentation)
+export default connect(mapStateToProps, { loadDependencies, standbyApp })(Presentation)

@@ -15,12 +15,6 @@ $mqmd:  (min-width:768px);
 $mqlg:  (min-width:1366px);
 $mqxlg: (min-width:1600px);
 
-@mixin mq($mq) {
-  @media #{$mq} {
-    @content;
-  }
-}
-
 // Common font sizes
 @function getRem($root, $value) {
   @return ($value / $root) * 1rem;

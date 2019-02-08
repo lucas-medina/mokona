@@ -1,8 +1,6 @@
 @import '../settings/variables';
 @import '../settings/extends';
 
-@import '../utility/animation';
-
 .presentation {
   position: absolute;
   top: 50%;
@@ -48,5 +46,14 @@
   &__subtitle {
     font-size: $fontBig;
     animation: surge .6s ease-in-out 1.4s 1 backwards;
+  }
+  &__loadingwrapper {
+    position: relative;
+    .presentationloader {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -200%);
+    }
   }
 }

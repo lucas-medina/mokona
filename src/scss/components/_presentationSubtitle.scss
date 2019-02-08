@@ -1,0 +1,14 @@
+.presentationsubtitle {
+  overflow: hidden;
+  position: relative;
+  &__item {
+    display: block;
+    line-height: 1.5;
+    &--next {
+      position: absolute;
+      bottom: -100%;
+      left: 0;
+      width: 100%;
+    }
+  }
+}
