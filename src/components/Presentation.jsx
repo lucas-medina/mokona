@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loadDependencies, standbyApp } from '../actions/flagActions';
+import { loadDependencies, standbyApp, showOptions } from '../actions/flagActions';
 import '../scss/components/_presentation.scss';
 import { getTextFragments } from '../utils/stringLib';
 import PresentationLoader from './PresentationLoader';
 import PresentationSubtitle from './PresentationSubtitle';
-
+import { TweenLite } from 'gsap';
 
 class Presentation extends Component {
 
@@ -16,7 +16,14 @@ class Presentation extends Component {
   }
 
   componentDidUpdate() {
-    
+    if (this.props.appStatus === 'loadingDependencies') {
+      this.nextStage(this.props.standbyApp, 4000);
+    }
+    if (this.props.appStatus === 'standby') {
+      TweenLite.to(this.presentation, 1, {top: 100, y: 0, onComplete: () => {
+        this.props.showOptions();
+      }});
+    }
   }
 
   renderSeparateText(arr) {
@@ -27,11 +34,11 @@ class Presentation extends Component {
     ));
   }
 
-  nextStage(action) {
+  nextStage(action, timer = 1000) {
     if (typeof action === 'function') {
       setTimeout(() => {
         action();
-      }, 1000);
+      }, timer);
     }
   }
 
@@ -39,23 +46,25 @@ class Presentation extends Component {
     const { appStatus, loadDependencies } = this.props;
     const isLoadingDeps = appStatus === 'loadingDependencies';
     const isReady = appStatus === 'standby';
+    const isShowingOptions = appStatus === 'showing-options'
 
     const title = this.renderSeparateText(getTextFragments('Mokona'));
     const blockClassName = `presentation${appStatus ? ' presentation--' + appStatus : ''}`;
 
     return (
-      <div className={blockClassName}>
+      <div ref={ref => this.presentation = ref} className={blockClassName}>
         <h1 className="presentation__title">{title}</h1>
         <div className="presentation__loadingwrapper">
           {isLoadingDeps && <PresentationLoader />}
           <h2 className="presentation__subtitle" 
-            onAnimationEnd={() => this.nextStage(loadDependencies)}>
+            onAnimationEnd={() => !isShowingOptions && this.nextStage(loadDependencies)}>
             {
               isLoadingDeps ? <PresentationSubtitle /> : 
-              isReady ? 'So, what do you want to do? :)' : 'Your personal organizer :)'
+              isReady || isShowingOptions ? 'So, what do you want to do? :)' : 'Your personal organizer :)'
             }
           </h2>
         </div>
+        { isShowingOptions ? <div className="presentation__content">{this.props.children}</div> : null }
       </div>
     )
   }
@@ -63,4 +72,4 @@ class Presentation extends Component {
 
 const mapStateToProps = ({ appStatus }) => ({ appStatus });
 
-export default connect(mapStateToProps, { loadDependencies, standbyApp })(Presentation)
+export default connect(mapStateToProps, { loadDependencies, standbyApp, showOptions })(Presentation)

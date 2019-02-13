@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import Presentation from './components/Presentation';
+import AppContainer from './containers/AppContainer';
+import './scss/style.scss';
 import store from './store';
 
-import './scss/style.scss';
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Presentation />
+        <AppContainer />
       </div>
     )
   }

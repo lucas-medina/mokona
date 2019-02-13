@@ -3,8 +3,6 @@ import { TweenLite, Power2 } from 'gsap'
 
 import '../scss/components/_presentationSubtitle.scss';
 
-const gsap = [TweenLite];
-
 export default class PresentationSubtitle extends Component {
 
   constructor(props) {
@@ -12,7 +10,6 @@ export default class PresentationSubtitle extends Component {
 
     this.animWrapper = React.createRef();
     this.animTween = null;
-    this.gsap = gsap;
   }
 
   interval;

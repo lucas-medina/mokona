@@ -1,0 +1,33 @@
+@import '../settings/variables';
+@import '../utility/containers';
+@import '../utility/animation';
+
+.actionlist {
+  transition: .25s ease-in-out;
+  margin-top: 50px;
+  width: 100%;
+  @extend %container;
+  display: flex;
+  justify-content: space-around;
+  &__item {
+    border: 2px solid $colorWhite;
+    border-radius: 4px;
+    padding: 2.2rem 3rem;
+    color: $colorWhite;
+    text-decoration: none;
+    animation: surge .6s ease-in-out .25s 1 backwards;
+    transition: .2s ease;
+    &:hover {
+      padding: 2.2rem 5rem;
+    }
+  }
+  &__itemtitle {
+    display: inline-block;
+    margin-left: .5em;
+    font-size: $fontBigger;
+  }
+  .fa {
+    display: inline-block;
+    font-size: $fontBigger;
+  }
+}
