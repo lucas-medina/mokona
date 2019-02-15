@@ -20,7 +20,7 @@ class Presentation extends Component {
       this.nextStage(this.props.standbyApp, 4000);
     }
     if (this.props.appStatus === 'standby') {
-      TweenLite.to(this.presentation, 1, {top: 100, y: 0, onComplete: () => {
+      TweenLite.to(this.presentation, 1, {top: 100, y: 0, clearProps: 'top, y', onComplete: () => {
         this.props.showOptions();
       }});
     }

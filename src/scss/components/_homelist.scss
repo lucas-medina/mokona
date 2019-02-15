@@ -2,14 +2,14 @@
 @import '../utility/containers';
 @import '../utility/animation';
 
-.actionlist {
+.homelist {
   transition: .25s ease-in-out;
   margin-top: 50px;
   width: 100%;
   @extend %container;
   display: flex;
   justify-content: space-around;
-  &__item {
+  &-item {
     border: 2px solid $colorWhite;
     border-radius: 4px;
     padding: 2.2rem 3rem;
@@ -20,14 +20,14 @@
     &:hover {
       padding: 2.2rem 5rem;
     }
-  }
-  &__itemtitle {
-    display: inline-block;
-    margin-left: .5em;
-    font-size: $fontBigger;
-  }
-  .fa {
-    display: inline-block;
-    font-size: $fontBigger;
+    &__title {
+      display: inline-block;
+      margin-left: .5em;
+      font-size: $fontBigger;
+    }
+    &__icon {
+      display: inline-block;
+      font-size: $fontBigger;
+    }
   }
 }
